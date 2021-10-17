@@ -1,9 +1,8 @@
 package calculator;
 
-import org.junit.jupiter.api.Test;
-
+import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.*;
-
+import calculator.StringCalculator;
 class StringCalculatorShould {
 	
 	public static void main(String args[]) {
@@ -34,4 +33,18 @@ class StringCalculatorShould {
 	public void testNewLine() {
 		assertEquals(6, StringCalculator.add("1\n2,3"));
 	}
+	
+	@Test
+	public void testOverThousand() {
+		assertEquals(2, StringCalculator.add("1005,2"));
+	}
+	
+	@Test
+	public void testNegativeNumver() {
+		try {
+			StringCalculator.add("-1,2");
+		} catch (IllegalArgumentException e) {
+			assertEquals(e.getMessage(), "Negatives not allowed: -1");
+		}
+	}	
 }

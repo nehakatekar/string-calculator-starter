@@ -36,7 +36,7 @@ class StringCalculator {
 				else
 					negString += ("," + number);
 			}
-			if (toInt(number) < 1000)
+			if (toInt(number) <= 1000)
 				total += toInt(number);
 		}
 
