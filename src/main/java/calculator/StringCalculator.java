@@ -1,47 +1,64 @@
 package calculator;
 
-class StringCalculator {
+public class StringCalculator {
 
  public static int add(String input) {
 		if (input.equals("")) {
 			return 0;
 		} else {
 			String delimiter = ",";
-			if (input.matches("//(.*)\n(.*)")) {
+			if (input.matches("/\n")) {
 				delimiter = Character.toString(input.charAt(2));
-				input = input.substring(4);
+				input = input.substring(1);
 			}
 
-			String numList[] = splitNumbers(input, delimiter + "|\n");
+			String numList[] = split(input, delimiter + "|;|\n");
 			return sum(numList);
 		}
+	}
+ 
+ 
+ public static int add2(String input) {
+	 
+	
+	 
+	 return 0;
+ }
+
+ 
+ 
+ 
+ 
+	private static String[] split(String numbers, String divider) {
+		return numbers.split(divider);
 	}
 
 	private static int toInt(String number) {
 		return Integer.parseInt(number);
 	}
 
-	private static String[] splitNumbers(String numbers, String divider) {
-		return numbers.split(divider);
-	}
 
 	private static int sum(String[] numbers) {
 		int total = 0;
-		String negStr = "";
+		String neg = "";
 
 		for (String number : numbers) {
 			if (toInt(number) < 0) {
-				if (negStr.equals(""))
-					negStr = number;
+				if (neg.equals(""))
+					neg = number;
 				else
-					negStr += ("," + number);
+					neg += ("," + number);
 			}
-			if (toInt(number) <= 1000)
+//			if (toInt(number) <= 1000)
+//				total += toInt(number);
+			if (toInt(number) > 1000 && toInt(number)<10000)
+				continue;
+			else
 				total += toInt(number);
 		}
 
-		if (!negStr.equals("")) {
-			throw new IllegalArgumentException("Negatives not allowed: " + negStr);
+		if (!neg.equals("")) {
+			throw new IllegalArgumentException("Negatives not allowed: " + neg);
 		}
 
 		return total;
